@@ -1,0 +1,230 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="./bootstrap-italia/css/bootstrap-italia.min.css">
+        <script>window.__PUBLIC_PATH__ = './bootstrap-italia/fonts'</script>
+        <link href="./c3/c3.css" rel="stylesheet">
+        <script src="https://d3js.org/d3.v5.min.js"></script>
+        <script src="./c3/c3.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" crossorigin=""></script>
+        <script src="./core.js"></script>
+        <style>
+            .leaflet-popup-content {
+                 max-height: 400px;
+                overflow-y: scroll;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="it-header-slim-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="it-header-slim-wrapper-content">
+                            <a style="font-weight: bold" href="#">Contest 'Rappresenta il dataset' 2019</a>
+                            <div class="nav-mobile">
+                                <nav>
+                                    <div class="link-list-wrapper collapse" id="menu1">
+                                        <ul class="link-list">
+                                            <li><a href="index.html">Home</a></li>
+                                            <li><a target="_blank" href="https://dati.regione.campania.it/opendata/">Sito istituzionale</a></li>
+                                            <li><a target="_blank" href="http://www.regione.campania.it/">Regione Campania</a></li>
+                                            <li><a target="_blank" href="https://www.agid.gov.it/">AgID</a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="it-header-center-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="it-header-center-content-wrapper">
+                            <div class="it-brand-wrapper">
+                                <a href="#">
+                                    <div class="it-brand-text">
+                                        <h2 class="no_toc">AURA</h2>
+                                        <h3 class="no_toc d-none d-md-block">Dashboard per il monitoraggio e l'analisi della qualità dell'aria in Regione Campania</h3>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row" style="padding-top: 10px">
+                        <div class="col-lg-2 col-sm-6">
+                            <button onclick="switchData(event);" id="benzeneBtn" style="width: 75%; margin-top: 5px" type="button" class="btn btn-outline-primary">Benzene</button>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <button onclick="switchData(event);" id="monossidoBtn" style="width: 75%; margin-top: 5px" type="button" class="btn btn-outline-primary">CO</button>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <button onclick="switchData(event);" id="azotoBtn" style="width: 75%; margin-top: 5px" type="button" class="btn btn-outline-primary">NO2</button>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <button onclick="switchData(event);" id="zolfoBtn" style="width: 75%; margin-top: 5px" type="button" class="btn btn-outline-primary">SO2</button>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <button onclick="switchData(event);" id="pmTenBtn" style="width: 75%; margin-top: 5px" type="button" class="btn btn-outline-primary">PM10</button>
+                        </div>
+                        <div class="col-lg-2 col-sm-6">
+                            <button onclick="switchData(event);" id="pmTwoBtn" style="width: 75%; margin-top: 5px" type="button" class="btn btn-outline-primary">PM2.5</button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-12" style="text-align: center">
+                            <h5 id="selezionato">Inquinante: Benzene (µg/m<sup>3</sup>)</h3>
+                        </div>
+                    </div>
+                    <script>
+                        var chart = c3.generate({
+                            bindto: '#primoQuadri',
+                            data: {
+                                url: 'https://raw.githubusercontent.com/nicoladileo/AURA_Dataset/master/benzene.csv',
+                                type: 'bar'
+                            },
+                            zoom: {
+                                enabled: true
+                            },
+                            bar: {
+                                width: {
+                                    ratio: 0.5 
+                                }
+                            },
+                            axis: {
+                                x: {
+                                    type: 'category',
+                                    categories: ['Maggio 2018', 'Giugno 2018','Luglio 2018','Agosto 2018']
+                                }
+                            }
+                        });
+                        var chart = c3.generate({
+                            bindto: '#secondoQuadri',
+                            data: {
+                                url: 'https://raw.githubusercontent.com/nicoladileo/AURA_Dataset/master/benzene2.csv',
+                                type: 'bar'
+                            },
+                            zoom: {
+                                enabled: true
+                            },
+                            bar: {
+                                width: {
+                                    ratio: 0.5 
+                                }
+                            },
+                            axis: {
+                                x: {
+                                    type: 'category',
+                                    categories: ['Settembre 2018', 'Ottobre 2018','Novembre 2018','Dicembre 2018']
+                                }
+                            }
+                        });
+                    </script>
+                    <div class="row" style="padding-top: 10px">
+                        <div class="col-lg-6 col-sm-12">
+                            <div id="primoQuadri"></div>
+                        </div>
+                        <div class="col-lg-6 col-sm-12">
+                            <div id="secondoQuadri"></div>
+                        </div>
+                    </div>    
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-lg-12 col-sm-12">
+                            <p>I grafici riportano per ogni inquinante, il valore massimo rilevato dalle stazioni presenti nei capoluogi di provincia della regione, nel mese di riferimento.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-12" style="text-align: center">
+                            <h5 id="selezionato">Limiti di riferimento (D.Lgs.155/2010)</h3>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px">
+                        <div class="col-lg-12 col-sm-12">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Inquinante</th>
+                                        <th scope="col">Periodo di mediazione</th>
+                                        <th scope="col">Limite</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Benzene (C6H6)</td>
+                                        <td>Anno solare</td>
+                                        <td>5 (µg/m<sup>3</sup>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Monossido di carbonio (CO)</td>
+                                        <td>Media giornaliera su 8 ore</td>
+                                        <td>10 (mg/m<sup>3</sup>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biossido di azoto (NO2)</td>
+                                        <td>Media massima oraria</td>
+                                        <td>200 (µg/m<sup>3</sup>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Biossido di zolfo (SO2)</td>
+                                        <td>Media massima oraria</td>
+                                        <td>350 (µg/m<sup>3</sup>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PM10</td>
+                                        <td>Media giornaliera</td>
+                                        <td>50 (µg/m<sup>3</sup>)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PM2.5</td>
+                                        <td>Anno civile</td>
+                                        <td>25 (µg/m<sup>3</sup>)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-12" style="text-align: center">
+                            <h5 id="selezionato">Centraline di monitoraggio ARPAC</h3>
+                            <p>La mappa permette di conoscere lo stato di attività delle centraline di monitoraggio presenti sul territorio regionale                           </p>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px; margin-bottom: 15px;">
+                        <div class="col-12" style="text-align: center">
+                            <div id="mapid" style="height: 400px"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <a href="#" aria-hidden="true" data-attribute="back-to-top" class="back-to-top" id="example">
+            <svg class="icon icon-light"><use xlink:href="https://auracampania.it/bootstrap-italia/svg/sprite.svg#it-arrow-up"></use></svg>
+        </a>
+        <footer class="bd-footer text-muted">
+            <div class="container">
+                <div class="py-4">
+                    <div class="row">
+                        <div class="col-12">
+                            <p>Contest 'Rappresenta il dataset 2019' - Progetto AURA</p>
+                            <p>Developed by <span><a target="_blank" href="https://github.com/nicoladileo">Nicola Dileo</a></span> - Thanks to <span><a target="_blank" href="https://italia.github.io/bootstrap-italia/">Designers Italia</a><span> for this beautiful Bootstrap UI Kit</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <script src="./bootstrap-italia/js/bootstrap-italia.bundle.min.js"></script>
+    </body>
+</html>
